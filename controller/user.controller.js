@@ -39,6 +39,7 @@ module.exports.LoginUser=async(req,res)=>{
         if(!camparepassword){
             return res.status(400).json("Password is Invalid")
         }
+        console.log("userchecked._id",userchecked,userchecked._id)
 const token=jwt.sign({id:userchecked._id,role:userchecked.role},process.env.JWT_SECRET,{expiresIn:"40d"});
 console.log("token",token);
 return res.status(200).json({message:"Login Successfully",user:userchecked,token:token})

@@ -7,7 +7,9 @@ const authMiddleware=async(req,res,next)=>{
         message:"No Token Provided"
     })
     try{
-        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY);
+
+        const decoded=jwt.verify(token,process.env.JWT_SECRET);
+        console.log("req.user",req.user)
         req.user=decoded;
         next();
     }

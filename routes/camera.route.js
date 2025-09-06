@@ -1,6 +1,8 @@
 const express=require("express");
 const router=express.Router();
-const CameraController=require("../controller/camera.controller")
-router.post("/create",CameraController.RegsiterCamera);
+const CameraController=require("../controller/camera.controller");
+const auth=require("../middleware/authmiddleware")
+router.post("/create",auth,CameraController.RegisterCamera);
+router.get("/camera/:cameraId",auth,CameraController.getCameraById)
 
 module.exports=router;
