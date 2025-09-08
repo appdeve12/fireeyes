@@ -85,12 +85,14 @@ exports.getallcameraforregistereduser = async (req, res) => {
   try {
     const userId = req.user.id;
     console.log("userId", userId);
-    const registerdcamerabyuserId = await Camera.findById({user:userId}).populate("user", "userName loginId");
+    
+    // Find all cameras where user matches userId
+    const registerdcamerabyuserId = await Camera.find({ user: userId }).populate("user", "userName loginId");
+    
     res.status(200).json({
-      message: "data found successfully",
-      registerdcamerabyuserId
-    })
-
+      message: "Data found successfully",
+      cameras: registerdcamerabyuserId
+    });
 
   } catch (error) {
     console.error("Internal server error:", error);
@@ -99,6 +101,7 @@ exports.getallcameraforregistereduser = async (req, res) => {
     });
   }
 }
+
 
 exports.howmanycameraregisterparticulruserId = async (req, res) => {
   try {
