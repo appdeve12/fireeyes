@@ -41,21 +41,21 @@ exports.RegisterCamera = async (req, res) => {
   }
 };
 
-exports.findallCamera=async(req,res)=>{
-    try{
-        const allcamera=await Camera.find().populate("user","userName loginId");
-        return res.status(200).json({
-            message:"Fetch All Camera Successfully",
-            allcamera:allcamera
-        })
+exports.findallCamera = async (req, res) => {
+  try {
+    const allcamera = await Camera.find().populate("user", "userName loginId");
+    return res.status(200).json({
+      message: "Fetch All Camera Successfully",
+      allcamera: allcamera
+    })
 
 
-    }catch(error){
-        console.error("Internal server error",error);
-res.status(500).json({
-    message:"Internal Server Error"
-})
-    }
+  } catch (error) {
+    console.error("Internal server error", error);
+    res.status(500).json({
+      message: "Internal Server Error"
+    })
+  }
 }
 exports.getCameraById = async (req, res) => {
   try {
@@ -81,49 +81,49 @@ exports.getCameraById = async (req, res) => {
     });
   }
 };
-exports.getallcameraforregistereduser=async(req,res)=>{
-  try{
-const userId=req.user.id;
-console.log("userId",userId);
-const registerdcamerabyuserId=await Camera.findById(userId).populate("user", "userName loginId");
-res.status(200).json({
-  message:"data found successfully",
-registerdcamerabyuserId
-})
+exports.getallcameraforregistereduser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    console.log("userId", userId);
+    const registerdcamerabyuserId = await Camera.findById({user:userId}).populate("user", "userName loginId");
+    res.status(200).json({
+      message: "data found successfully",
+      registerdcamerabyuserId
+    })
 
 
-  }catch(error){
-console.error("Internal server error:", error);
+  } catch (error) {
+    console.error("Internal server error:", error);
     res.status(500).json({
       message: "Internal Server Error",
     });
   }
 }
 
-exports.howmanycameraregisterparticulruserId=async(req,res)=>{
-    try{
-const userId=req.user.id;
-const findallcameraperuserid=await Camera.find({user:userId}).populate("user","userName loginId");
-if(!findallcameraperuserid){
-    return res.status(400).json({
-        message:"no camera found for that camera"
+exports.howmanycameraregisterparticulruserId = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const findallcameraperuserid = await Camera.find({ user: userId }).populate("user", "userName loginId");
+    if (!findallcameraperuserid) {
+      return res.status(400).json({
+        message: "no camera found for that camera"
+      })
+    }
+    return res.status(200).json({
+      message: "Cameras fetch corresponding users",
+      findallcameraperuserid: findallcameraperuserid
     })
+  } catch (error) {
+    console.error("Internal server error", error);
+    res.status(500).json({
+      message: "Internal Server Error"
+    })
+  }
 }
-return res.status(200).json({
-    message:"Cameras fetch corresponding users",
-    findallcameraperuserid:findallcameraperuserid
-})
-    }catch(error){
-                        console.error("Internal server error",error);   
-res.status(500).json({
-    message:"Internal Server Error"
-})
-    }
-}
-exports.updateparticulrcamera=async(req,res)=>{
-    try{
+exports.updateparticulrcamera = async (req, res) => {
+  try {
 
-    }catch(error){
+  } catch (error) {
 
-    }
+  }
 }
