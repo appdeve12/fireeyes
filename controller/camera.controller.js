@@ -123,10 +123,30 @@ exports.howmanycameraregisterparticulruserId = async (req, res) => {
     })
   }
 }
-exports.updateparticulrcamera = async (req, res) => {
+exports.updateParticularCamera = async (req, res) => {
   try {
+    const { cameraName } = req.params;
+
+    // Find if camera exists
+    const existingCamera = await Camera.findOne({ cameraName });
+    if (!existingCamera) {
+      return res.status(404).json({ message: "Camera not found" });
+    }
+
+    // Update camera
+    const updatedCamera = await Camera.findOneAndUpdate(
+      { cameraName },
+      { ...req.body },
+      { new: true } // ensures updated document is returned
+    );
+
+    res.status(200).json({
+      message: "Camera updated successfully",
+      updatedCamera
+    });
 
   } catch (error) {
-
+    console.error("Error updating camera:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};

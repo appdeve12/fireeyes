@@ -4,6 +4,8 @@ const CameraController=require("../controller/camera.controller");
 const auth=require("../middleware/authmiddleware")
 router.post("/create",auth,CameraController.RegisterCamera);
 router.get("/camera/:cameraName",auth,CameraController.getCameraById);
-router.get("/cameraall",auth,CameraController.getallcameraforregistereduser)
+router.get("/cameraall",auth,CameraController.getallcameraforregistereduser);
+router.put("/camera/:cameraName", auth,CameraController.updateParticularCamera);
+
 
 module.exports=router;
