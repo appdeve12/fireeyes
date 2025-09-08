@@ -87,7 +87,7 @@ exports.getallcameraforregistereduser = async (req, res) => {
     console.log("userId", userId);
     
     // Find all cameras where user matches userId
-    const registerdcamerabyuserId = await Camera.find({ user: userId }).select("cameraName");
+    const registerdcamerabyuserId = await Camera.find({ user: userId }).select("cameraName cameraId cameraType location exactLocation userName");
     
     res.status(200).json({
       message: "Data found successfully",
