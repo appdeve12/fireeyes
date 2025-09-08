@@ -59,9 +59,9 @@ exports.findallCamera = async (req, res) => {
 }
 exports.getCameraById = async (req, res) => {
   try {
-    const { cameraId } = req.params; // ✅ correctly extract cameraId
+    const { cameraName } = req.params; // ✅ correctly extract cameraId
 
-    const cameradetailbyid = await Camera.findOne({ cameraId })
+    const cameradetailbyid = await Camera.findOne({ cameraName })
       .populate("user", "userName loginId");
 
     if (!cameradetailbyid) {
