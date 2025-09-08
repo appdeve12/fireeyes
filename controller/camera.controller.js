@@ -81,6 +81,24 @@ exports.getCameraById = async (req, res) => {
     });
   }
 };
+exports.getallcameraforregistereduser=async(req,res)=>{
+  try{
+const userId=req.user.id;
+console.log("userId",userId);
+const registerdcamerabyuserId=await Camera.findById(userId).populate("user", "userName loginId");
+res.status(200).json({
+  message:"data found successfully",
+registerdcamerabyuserId
+})
+
+
+  }catch(error){
+console.error("Internal server error:", error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+}
 
 exports.howmanycameraregisterparticulruserId=async(req,res)=>{
     try{
